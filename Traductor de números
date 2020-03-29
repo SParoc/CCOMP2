@@ -1,0 +1,168 @@
+//Traduccion de numeros
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+string convertir(long long numero, string numeroStr, string unidades[], string decenas[], string centenas[]);
+string leerDecenas(long long numero, string decenas[], string unidades[]);
+string leerCentenas(long long numero, string decenas[], string unidades[], string centenas[]);
+string leerMillares(long long numero, string decenas[], string unidades[], string centenas[], string auxMillar);
+
+int main()
+{
+  string unidades[10] = {"cero","uno", "dos", "tres", "cuatro",
+                        "cinco", "seis", "siete", "ocho", "nueve"};
+  string decenas[18] = {"diez", "once", "doce", "trece", "catorce",
+                       "quince", "dieciseis", "diecisiete", "dieciocho",
+                       "diecinueve", "veinte", "treinta", "cuarenta",
+                       "cincuenta", "sesenta", "setenta", "ochenta", "noventa"};
+  string centenas[10] = {"cien","ciento","doscientos","trescientos", "cuatrocientos",
+                         "quinientos", "seiscientos", "setecientos", "ochocientos",
+                         "novecientos"};
+
+  long long numero;
+  string numeroStr;
+
+  cout<<"Introducir numero (del 0 al 999999999999): "<<endl;
+  cin>>numero;
+  cout<<"\nEl numero en letras es: "<<convertir(numero, numeroStr, unidades, decenas, centenas);
+
+}
+
+string convertir(long long numero, string numeroStr, string unidades[], string decenas[], string centenas[])
+{
+  string auxMillar, auxMillon;
+
+  if (numero >= 0 && numero < 10)
+  {
+    return unidades[numero];
+  }
+  if (numero >= 10 && numero < 100)
+  {
+    return leerDecenas(numero, decenas, unidades);
+  }
+  if (numero >= 100 && numero < 1000)
+  {
+    return leerCentenas(numero, decenas, unidades, centenas);
+  }
+  if (numero >= 1000 && numero < 1000000)
+  {
+    return leerMillares(numero, decenas, unidades, centenas, auxMillar);
+  }
+  if (numero >= 1000000 && numero < 1000000000000)
+  {
+    if (numero < 10000)
+    {
+      auxMillon = unidades[numero/1000000];
+    }
+    else if (numero >= 10000000 && numero < 100000000)
+    {
+      auxMillon = leerDecenas(numero/1000000, decenas, unidades);
+    }
+    else if (numero >= 100000000 && numero < 1000000000)
+    {
+      auxMillon = leerCentenas(numero/1000000, decenas, unidades, centenas);
+    }
+    else
+    {
+        auxMillon = leerMillares(numero/1000000, decenas, unidades, centenas, auxMillar);
+    }
+
+    if (auxMillon[auxMillon.length()-2] == 'n')
+    {
+      auxMillon.pop_back();
+    }
+
+    if (numero == 1000000)
+    {
+      return "un millon";
+    }
+    if (numero % 1000000 == 0)
+    {
+      return auxMillon + " millones";
+    }
+    else
+    {
+      return auxMillon + " millones " + leerMillares(numero - (numero/1000000)*1000000, decenas, unidades, centenas, auxMillar);
+    }
+  }
+}
+
+string leerDecenas(long long numero, string decenas[], string unidades[])
+{
+  if (numero >= 10 && numero <= 20)
+  {
+    return decenas[numero - 10];
+  }
+  else if (numero > 20 && numero < 30)
+  {
+    return "veinti" + unidades[numero - 20];
+  }
+  else
+  {
+    if (numero % 10 == 0)
+    {
+      return decenas[numero/10 + 8];
+    }
+    else
+    {
+      return decenas[numero/10 + 8] + " y " + unidades[numero - ((numero/10)*10)];
+    }
+  }
+}
+
+string leerCentenas(long long numero, string decenas[], string unidades[], string centenas[])
+{
+  if (numero == 100)
+  {
+    return "cien";
+  }
+  else if (numero % 100 == 0)
+  {
+    return centenas[numero/100];
+  }
+  else if ((numero - (numero/100) * 100) > 9)
+  {
+    return centenas[numero/100] + " " + leerDecenas((numero - 100*(numero/100)), decenas, unidades);
+  }
+  else
+  {
+    return centenas[numero/100] + " " + unidades[numero - 100*(numero/100)];
+  }
+}
+
+string leerMillares(long long numero, string decenas[], string unidades[], string centenas[], string auxMillar)
+{
+  if (numero == 1000)
+  {
+    return "mil";
+  }
+  if (numero < 10000)
+  {
+    auxMillar = unidades[numero/1000];
+  }
+  else if (numero >= 10000 && numero < 100000)
+  {
+    auxMillar = leerDecenas(numero/1000, decenas, unidades);
+  }
+  else
+  {
+    auxMillar = leerCentenas(numero/1000, decenas, unidades, centenas);
+  }
+
+  if (auxMillar[auxMillar.length()-2] == 'n')
+  {
+    auxMillar.pop_back();
+  }
+
+  if (numero % 1000 == 0)
+  {
+    return auxMillar + " mil";
+  }
+  else
+  {
+    return auxMillar + " mil " + leerCentenas(numero - (numero/1000)*1000, decenas, unidades, centenas);
+  }
+}
