@@ -5,7 +5,7 @@
 
 using namespace std;
 
-string convertir(long long numero, string numeroStr, string unidades[], string decenas[], string centenas[]);
+string convertir(long long numero, string unidades[], string decenas[], string centenas[]);
 string leerDecenas(long long numero, string decenas[], string unidades[]);
 string leerCentenas(long long numero, string decenas[], string unidades[], string centenas[]);
 string leerMillares(long long numero, string decenas[], string unidades[], string centenas[], string auxMillar);
@@ -23,15 +23,14 @@ int main()
                          "novecientos"};
 
   long long numero;
-  string numeroStr;
 
   cout<<"Introducir numero (del 0 al 999999999999): "<<endl;
   cin>>numero;
-  cout<<"\nEl numero en letras es: "<<convertir(numero, numeroStr, unidades, decenas, centenas);
+  cout<<"\nEl numero en letras es: "<<convertir(numero, unidades, decenas, centenas);
 
 }
 
-string convertir(long long numero, string numeroStr, string unidades[], string decenas[], string centenas[])
+string convertir(long long numero, string unidades[], string decenas[], string centenas[])
 {
   string auxMillar, auxMillon;
 
