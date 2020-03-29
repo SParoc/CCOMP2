@@ -12,7 +12,7 @@ int main()
   cout<<"\nIngresar ano: "<<endl; cin>>ano;
   cout<<"\nIngresar mes: "<<endl; cin>>mes;
 
-  if (ano >= 1906 && ano <= 2198)
+  if (ano >= 1906)
   {
     for(int i = 1907; i <= ano; i++)
     {
@@ -65,9 +65,5 @@ int main()
       }
       cout<<"\t29";
     }
-  }
-  else
-  {
-    cout<<"\nAno fuera de rango"<<endl;
   }
 }
