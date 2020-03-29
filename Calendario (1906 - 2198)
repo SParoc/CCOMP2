@@ -1,0 +1,73 @@
+//Calendario
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+  int ano, mes, tab = 0;
+  int diasSobrantesPorMes[12] = {3,0,3,2,3,2,3,3,2,3,2,3};
+
+  cout<<"\nIngresar ano: "<<endl; cin>>ano;
+  cout<<"\nIngresar mes: "<<endl; cin>>mes;
+
+  if (ano >= 1906 && ano <= 2198)
+  {
+    for(int i = 1907; i <= ano; i++)
+    {
+      if((i % 4 == 0 && mes > 2)||(i % 4 == 1 && mes <= 2))
+      {
+        tab += 1;
+      }
+      tab += 1;
+
+      if(tab >= 7)
+      {
+        tab = tab % 7;
+      }
+    }
+    cout<<"\n\n\tLu\tMa\tMi\tJu\tVi\tSa\tDo\n\n";
+
+    for(int k = 0; k < mes - 1; k++)
+    {
+      tab += diasSobrantesPorMes[k];
+    }
+
+    if(ano>2099) // No sé por qué, pero después del año 2100 se corre un día
+    {
+      tab += 6;
+    }
+    if(tab >= 7)
+    {
+      tab = tab % 7;
+    }
+    for(int j = 0; j < tab; j++)
+    {
+      cout<<"  \t";
+    }
+
+    for(int l = 1; l <= 28 + diasSobrantesPorMes[mes-1]; l++)
+    {
+      if(tab >= 7)
+      {
+        tab = tab % 7;
+        cout<<"\n";
+      }
+      cout<<"\t"<<l;
+      tab += 1;
+    }
+    if (ano % 4 == 0 && mes == 2)
+    {
+      if (tab >= 6)
+      {
+        cout<<"\n";
+      }
+      cout<<"\t29";
+    }
+  }
+  else
+  {
+    cout<<"\nAno fuera de rango"<<endl;
+  }
+}
