@@ -1,0 +1,29 @@
+//Vuelto
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+  int i = 0, s = 0;
+  double dinero;
+  double soles[11] = {200,100,50,20,10,5,2,1,0.5,0.2,0.1};
+  cout<<"Ingresar cantidad: "<<endl;
+  cin>>dinero;
+
+  while (dinero > 0)
+  {
+    while (soles[i] <= dinero)
+    {
+      dinero -= soles[i];
+      s++;
+    }
+    if (s != 0)
+    {
+      cout<<"\n"<<soles[i]<<" soles: "<<s;
+    }
+    s = 0;
+    i++;
+  }
+}
