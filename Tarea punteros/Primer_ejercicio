@@ -1,0 +1,82 @@
+//Primer Ejercicio 
+//Sebastian Augusto Paz Rocha - CCOMP 3-1.2
+
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+
+using namespace std;
+
+void PrimerEjercicio(int* input, int* outPut_1, int* outPut_2, int tam);
+
+int main()
+{
+	int *inputArr, *outPutArr_1, *outPutArr_2;
+	int* input, * outPut_1, * outPut_2;
+	int tam;
+
+	cout << "Introducir tamano de los arrays: ";//Para gustos y colores, el programa trabajara con arrays dinamicos
+	cin >> tam;
+
+	inputArr = new int[tam];
+	outPutArr_1 = new int[tam];
+	outPutArr_2 = new int[tam];
+
+	srand(time(NULL));
+
+	input = &(inputArr[0]);
+	outPut_1 = &(outPutArr_1[0]);
+	outPut_2 = &(outPutArr_2[0]);
+
+	cout << "Numeros aleatorios: " << endl; //Genera el array input y lo llena con numeros aleatorios
+
+	for (int i = 0; i < tam; i++)
+	{
+		*input = rand() % 100 + 1;
+		cout << " " << *input;
+		input++;
+	}
+
+	input -= tam; //Hace que el puntero vuelva a apuntar a la primera posicion del array
+
+	PrimerEjercicio(input, outPut_1, outPut_2, tam);
+
+	cout << "\nNumeros pares: " << endl;//Imprime los dos arrays de salida
+	for (int i = 0; i < tam; i++)
+	{
+		cout << ' ' << *outPut_1;
+		outPut_1++;
+	}
+	cout << "\nNumeros impares: " << endl;
+	for (int i = 0; i < tam; i++)
+	{
+		cout << ' ' << *outPut_2;
+		outPut_2++;
+	}
+}
+
+void PrimerEjercicio(int* input, int* outPut_1, int* outPut_2, int tam)
+{
+	for (int i = 0; i <= tam * 2; i++)
+	{
+		if (i < tam) //Mientras el array input tenga elementos los distribuira a los otros arrays
+		{
+			if (*input % 2 == 0)
+			{
+				*outPut_1 = *input;
+				outPut_1++;
+			}
+			else
+			{
+				*outPut_2 = *input;
+				outPut_2++;
+			}
+			input++;
+		}
+		else //Llena los arrays de salida con ceros cuando se agotan los elementos de input
+		{
+			*outPut_1 = 0; *outPut_2 = 0;
+			outPut_1++; outPut_2++;
+		}
+	}
+}
