@@ -1,0 +1,80 @@
+//Segundo Ejercicio 
+//Sebastian Augusto Paz Rocha - CCOMP 3-1.2
+
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
+
+void SegundoEjercicio(int* arrPtr, int tam);
+
+int main()
+{
+    int* Arr;
+    int* arrPtr;
+    int tam;
+
+    cout << "Introducir tamano del array: ";
+    cin >> tam;
+
+    Arr = new int[tam];
+    arrPtr = &(Arr[0]);
+
+    for (int i = 0; i < tam; i++)
+    {
+        *arrPtr = rand() % 100 + 1;
+        cout << ' ' << *arrPtr;
+        arrPtr++;
+    }
+    arrPtr -= tam; //Vuelve a apuntar al primer elemento
+
+    SegundoEjercicio(arrPtr, tam);
+
+    cout << endl;
+    for (int i = 0; i < tam; i++)
+    {
+        cout << ' ' << *arrPtr;
+        arrPtr++;
+    }
+
+}
+
+void SegundoEjercicio(int* arrPtr, int tam)
+{
+    bool cambio = true;
+    int aux1, aux2;
+    int comienzo = 0;
+    int fin = tam - 1;
+    
+
+    while (cambio)
+    {
+        cambio = false;
+
+        for (int i = comienzo; i < fin; i++) {
+            if (*(arrPtr + i) > *(arrPtr + i + 1)) {
+                aux1 = *(arrPtr + i);
+                *(arrPtr + i) = *(arrPtr + i + 1);
+                *(arrPtr + i + 1) = aux1;
+                cambio = true;
+            }
+        }
+
+        if (!cambio) { break; }
+
+        cambio = false;
+
+        fin--;
+
+        for (int i = fin - 1; i >= comienzo; i--) {
+            if (*(arrPtr + i) > * (arrPtr + i + 1)) {
+                aux2 = *(arrPtr + i);
+                *(arrPtr + i) = *(arrPtr + i + 1);
+                *(arrPtr + i + 1) = aux2;
+                cambio = true;
+            }
+        }
+        ++comienzo;
+    }
+}
