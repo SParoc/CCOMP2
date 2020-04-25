@@ -26,7 +26,7 @@ int main()
 
 	for (int i = 0; i < tam; i++)//Llena el array de entrada
 	{
-		cout << "Introduzca el elemento en la posicion" << i << " : ";
+		cout << "Introduzca el elemento en la posicion " << i << ": ";
 		cin>>*input;
 		input++;
 	}
