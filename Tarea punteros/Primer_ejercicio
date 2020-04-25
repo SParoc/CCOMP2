@@ -2,8 +2,6 @@
 //Sebastian Augusto Paz Rocha - CCOMP 3-1.2
 
 #include <iostream>
-#include <ctime>
-#include <cstdlib>
 
 using namespace std;
 
@@ -11,7 +9,7 @@ void PrimerEjercicio(int* input, int* outPut_1, int* outPut_2, int tam);
 
 int main()
 {
-	int *inputArr, *outPutArr_1, *outPutArr_2;
+	int* inputArr, * outPutArr_1, * outPutArr_2;
 	int* input, * outPut_1, * outPut_2;
 	int tam;
 
@@ -22,18 +20,14 @@ int main()
 	outPutArr_1 = new int[tam];
 	outPutArr_2 = new int[tam];
 
-	srand(time(NULL));
-
 	input = &(inputArr[0]);
 	outPut_1 = &(outPutArr_1[0]);
 	outPut_2 = &(outPutArr_2[0]);
 
-	cout << "Numeros aleatorios: " << endl; //Genera el array input y lo llena con numeros aleatorios
-
-	for (int i = 0; i < tam; i++)
+	for (int i = 0; i < tam; i++)//Llena el array de entrada
 	{
-		*input = rand() % 100 + 1;
-		cout << " " << *input;
+		cout << "Introduzca el elemento en la posicion" << i << " : ";
+		cin>>*input;
 		input++;
 	}
 
